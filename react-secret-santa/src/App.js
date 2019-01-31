@@ -1,28 +1,36 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from "react";
+import { css, keyframes } from "emotion";
 
-class App extends Component {
+export class Header extends Component {
   render() {
+    const headerStyle = css`
+      display: flex;
+      justify-content: flex-end;
+    `;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className={headerStyle}>
+        <div>Hi {this.props.name}</div>
+        <button>Logout</button>
       </div>
     );
   }
 }
 
-export default App;
+export default class App extends Component {
+  state = {
+    user: {
+      name: "Rob",
+      wishlist: ["Bike", "Action Man"]
+    }
+  };
+
+  render() {
+    return (
+      <Fragment>
+        <Header name={this.state.user.name} />
+        <div>Wishlist: {this.state.user.wishlist[0]} </div>
+      </Fragment>
+    );
+  }
+}
